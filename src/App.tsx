@@ -1,33 +1,61 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import {CurrenciesTable} from "./components/CurrenciesTable";
+import {ExchangeCalculator} from "./components/ExchangeCalculator";
+
+export type CurrencyRow = {
+  country: string;
+  currencyName: string;
+  currencyCode: string;
+  amount: number;
+  rate: number;
+}
+
+const parseCurrencyRow = (currency: string): CurrencyRow => {
+  const columns = currency.split('|');
+  return {
+    country: columns[0],
+    currencyName: columns[1],
+    currencyCode: columns[3],
+    amount: parseInt(columns[2], 10),
+    rate: parseFloat(columns[4])
+  }
+}
 
 function App() {
-  const [coursesList, setCoursesList] = useState<string[]>([])
+  const [currencyList, setCurrencyList] = useState<CurrencyRow[]>([]);
+  const [dateString, setDateString] = useState<string>('');
+
   const getExchangeCourse = async () => {
     const resp = await fetch('https://cors-anywhere.herokuapp.com/https://www.cnb.cz/en/financial-markets/foreign-exchange-market/central-bank-exchange-rate-fixing/central-bank-exchange-rate-fixing/daily.txt');
     console.log(resp);
     if(resp.ok) {
       const text = await resp.text();
-      setCoursesList(text.split('\n'));
+      const rows = text.split('\n');
+      setDateString(rows[0].split('#')[0]);
+      setCurrencyList(rows.slice(1).map(row => parseCurrencyRow(row)));
     } else {
-      setCoursesList([]);
+      setCurrencyList([]);
     }
   }
 
   useEffect(() => {
-    getExchangeCourse();
-    // setCoursesList(coursesFixture.split('\n'));
+    // getExchangeCourse();
+    setDateString(coursesFixture.split('\n')[0].split('#')[0]);
+    setCurrencyList(coursesFixture.split('\n').slice(1).map(row => parseCurrencyRow(row)));
   }, []);
 
   return (
-    <div>
-      <h1>Exchange course tool</h1>
-      {!coursesList.length && <div>Something went wrong</div>}
-      <h3>Date {coursesList[0].split('#')[0]}</h3>
-      <table>
-      {coursesList.slice(1).map(course => <tr>{course.split('|').map(col => <td>{col}</td>)}</tr>)}
-      </table>
-    </div>
+    <>
+      <div>
+        <h1>Exchange course tool</h1>
+        {!currencyList.length ? <div>Something went wrong</div> :
+          <>
+            <h3>Date {dateString}</h3>
+            <CurrenciesTable rates={currencyList}/></>}
+      </div>
+      {currencyList.length && <ExchangeCalculator currencies={currencyList} />}
+    </>
   );
 }
 
