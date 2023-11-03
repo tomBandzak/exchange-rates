@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {CurrencyRow} from "../App";
+import React, { useState } from "react";
+import { CurrencyRow } from "../functions/parseCurrencyRow";
 
 const calculateAmountInCurrency = (amountInCZK: number, currency: CurrencyRow) => amountInCZK / currency.rate  * currency.amount;
 

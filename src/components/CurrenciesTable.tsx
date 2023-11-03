@@ -1,5 +1,5 @@
 import React from "react";
-import {CurrencyRow} from "../App";
+import { CurrencyRow } from "../functions/parseCurrencyRow";
 
 type Props = {
   rates: CurrencyRow[];
