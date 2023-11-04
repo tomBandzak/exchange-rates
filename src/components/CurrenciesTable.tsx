@@ -1,12 +1,22 @@
-import React from "react";
-import { CurrencyRow } from "../functions/parseCurrencyRow";
+import React from 'react';
+import { CurrencyRow } from '../functions/parseCurrencyRow';
+import { Col, HeadCol, Row, Table } from '../styled';
 
 type Props = {
   rates: CurrencyRow[];
 }
 
-export const CurrenciesTable = ({ rates }: Props) => <table>
+export const CurrenciesTable = ({ rates }: Props) => <Table>
+  <thead>
+    <tr>
+      <HeadCol width={'50%'}>Country</HeadCol>
+      <HeadCol width={'12%'} minwidth={'90px'}>Currency</HeadCol>
+      <HeadCol>Amount</HeadCol>
+      <HeadCol>Code</HeadCol>
+      <HeadCol>Rate</HeadCol>
+    </tr>
+  </thead>
   <tbody>
-  {rates.slice(1).map(rate => <tr key={rate.currencyCode}>{Object.values(rate).map((col, j) => <td key={`col-${j}`}>{col}</td>)}</tr>)}
+  {rates.map(rate => <Row key={rate.currencyCode}>{Object.values(rate).map((col, j) => <Col key={`col-${j}`}>{col}</Col>)}</Row>)}
   </tbody>
-</table>
+</Table>
