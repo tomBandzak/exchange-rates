@@ -14,7 +14,13 @@ export const Input = styled.input<{ isError?: boolean }>`
   }
   &:focus-visible {
     outline: unset;
-  }  
+  }
+  &::placeholder {
+    color: ${theme.colors.font.main};
+  }
+  &:last-child {
+    margin-right: ${theme.spacing.b};
+  }
 `;
 
 export const SelectOption = styled.span`

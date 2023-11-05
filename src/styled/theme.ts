@@ -2,6 +2,7 @@ export const theme = {
   colors: {
     font: {
       main: '#000',
+      description: '#aaa',
       header: '#2526a9',
     },
     line: {
@@ -17,6 +18,13 @@ export const theme = {
     }
   },
   typography: {
+    small: {
+      normal: {
+        fontSize: '14px',
+        fontWeight: '300',
+        lineHeight: '20px'
+      }
+    },
     medium: {
       normal: {
         fontSize: '16px',

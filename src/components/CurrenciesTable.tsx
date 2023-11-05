@@ -13,8 +13,8 @@ export const CurrenciesTable = ({ exchangedCurrency, rates, setExchangedCurrency
   <thead>
     <tr>
       <HeadCol />
-      <HeadCol width={'50%'}>Country</HeadCol>
-      <HeadCol width={'12%'} minwidth={'90px'}>Currency</HeadCol>
+      <HeadCol width={'30%'}>Country</HeadCol>
+      <HeadCol minwidth={'90px'}>Currency</HeadCol>
       <HeadCol>Amount</HeadCol>
       <HeadCol>Code</HeadCol>
       <HeadCol>Rate</HeadCol>

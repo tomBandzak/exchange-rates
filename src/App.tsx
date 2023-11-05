@@ -5,7 +5,7 @@ import { ratesFixture } from './fixtures/ratesFixture';
 import { CurrencyRow, parseCurrencyRow } from './functions/parseCurrencyRow';
 import { getExchangeRates } from './request/ratesRequest';
 import { QueryClient, useQuery } from '@tanstack/react-query';
-import { Box, Page, XLargeHeading } from './styled';
+import { Box, Description, Page, XLargeHeading } from './styled';
 
 function App() {
   const [currencyList, setCurrencyList] = useState<CurrencyRow[]>([]);
@@ -36,11 +36,12 @@ function App() {
   return (
     <Page>
       <div>
-        <XLargeHeading>Exchange course tool</XLargeHeading>
+        <XLargeHeading>Czech crowns conversion calculator</XLargeHeading>
         {false ? <div>Something went wrong</div> :
           <>
             <h3>Date {dateString}</h3>
             <Box>
+              <Description>Find out the amount of Czech crowns converted to foreign currency</Description>
               {currencyList.length && <ExchangeCalculator currencies={currencyList} exchangedCurrency={exchangedCurrency} setExchangedCurrency={setExchangedCurrency}/>}
               <CurrenciesTable rates={currencyList} exchangedCurrency={exchangedCurrency} setExchangedCurrency={setExchangedCurrency} />
             </Box>

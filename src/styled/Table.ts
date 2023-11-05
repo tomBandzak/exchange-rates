@@ -5,11 +5,12 @@ export const Table = styled.table`
   background-color: ${theme.colors.background.main};
   margin-bottom: ${theme.spacing.c};
   border-spacing: unset;
+  width: 100%;
 `;
 
 export const HeadCol = styled.th<{ width?: string, minwidth?: string }>`
   padding: ${theme.spacing.a} ${theme.spacing.b};
-  width: ${props => props.width || 'inherit'};
+  width: ${props => props.width || 'fit-content'};
   min-width: ${props => props.minwidth || 'unset'};
   border-top: 1px solid ${theme.colors.line.normal};
   border-bottom: 1px solid ${theme.colors.line.normal};
@@ -17,6 +18,7 @@ export const HeadCol = styled.th<{ width?: string, minwidth?: string }>`
   font-size: ${theme.typography.medium.bold.fontSize};
   font-weight: ${theme.typography.medium.bold.fontWeight};
   line-height: ${theme.typography.medium.bold.lineHeight};
+  text-align: left;
 `
 
 export const Row = styled.tr<{ selected?: boolean }>`
