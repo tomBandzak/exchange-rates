@@ -1,7 +1,8 @@
 export const theme = {
   colors: {
     font: {
-      main: '#2526a9',
+      main: '#000',
+      header: '#2526a9',
     },
     line: {
       normal: '#ddd',
@@ -9,6 +10,7 @@ export const theme = {
       error: '#ff3333'
     },
     background: {
+      fill: '#F9F9F9',
       main: '#fff',
       header: '#efefef',
       hover: '#ddd'

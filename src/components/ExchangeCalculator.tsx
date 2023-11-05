@@ -1,26 +1,39 @@
 import React, { useState } from 'react';
+import Select from 'react-select';
 import { CurrencyRow } from '../functions/parseCurrencyRow';
-import { Calculator, Dropdown, Input } from '../styled';
+import {Calculator, Flag, Input, SelectOption, theme} from '../styled';
 import { calculateAmountInCurrency, formatNumber } from '../functions';
+import flags from '../assets/flags';
 
 type Props = {
   currencies: CurrencyRow[];
+  exchangedCurrency?: string;
+  setExchangedCurrency: (currency: string) => void;
 }
 
-export const ExchangeCalculator = ({ currencies }: Props) => {
+export const ExchangeCalculator = ({ currencies, exchangedCurrency, setExchangedCurrency }: Props) => {
   let inputValidation: NodeJS.Timeout | undefined = undefined;
   // not sure if decimal is accepted as input for calculation - going with string
   const [inputIsError, setInputIsError] = useState<boolean>(false);
-  const [exchangedAmount, setExchangedAmount] = useState<string>('0');
-  const [exchangedCurrency, setExchangedCurrency] = useState<string>(currencies[0].currencyCode)
+  const [exchangedAmount, setExchangedAmount] = useState<string | undefined>(undefined);
 
   const validateInput = (num: string) => {
     setExchangedAmount(num)
-    const parsedNumber = parseFloat(num);
+    const parsedNumber = num === '' ? 0 : parseFloat(num);
 
     clearTimeout(inputValidation);
     inputValidation = setTimeout(() => setInputIsError(isNaN(parsedNumber)), 500);
   }
+
+  const options = currencies.map(currency => ({
+    value: currency.currencyCode,
+    label: <SelectOption><Flag alt={'flag'} height={35} src={flags[currency.currencyCode]}/>{currency.currencyCode}</SelectOption>
+  }));
+
+  const defaultOption = exchangedCurrency ? {
+    value: exchangedCurrency,
+    label: <SelectOption><Flag alt={'flag'} height={35} src={flags[exchangedCurrency]}/>{exchangedCurrency}</SelectOption>
+  } : undefined;
 
   return <Calculator>
     <Input
@@ -28,18 +41,20 @@ export const ExchangeCalculator = ({ currencies }: Props) => {
       value={exchangedAmount}
       onChange={e => validateInput(e.target.value)}
       isError={inputIsError}
-    /> CZK &rarr;
-    <Dropdown
-      value={exchangedCurrency || undefined}
-      onChange={e => setExchangedCurrency(e.target.value)}
-    >
-      {currencies.map(currency => <option key={currency.currencyCode}
-                                          value={currency.currencyCode}>{currency.currencyCode}
-                                  </option>)}
-    </Dropdown>
+      placeholder={'0'}
+    /> <Flag alt={'flag'} height={35} src={flags.CZK}/> CZK &rarr;
+    <Select
+      options={options}
+      value={defaultOption}
+      defaultValue={defaultOption}
+      onChange={option => option && setExchangedCurrency(option.value)}
+      styles={{
+        control: (styles) => ({ ...styles, width: 'fit-content', marginLeft: theme.spacing.a }),
+        valueContainer: (styles) => ({ ...styles, padding: `0 ${theme.spacing.b}`})
+      }}/>
     <Input
       type={'text'}
-      value={formatNumber(calculateAmountInCurrency(parseFloat(exchangedAmount) || 0, currencies.find(currency => currency.currencyCode === exchangedCurrency) || currencies[0]) || 0)}
+      value={formatNumber(calculateAmountInCurrency(parseFloat(exchangedAmount || '') || 0, currencies.find(currency => currency.currencyCode === exchangedCurrency) || currencies[0]) || 0)}
       readOnly={true}
     />
   </Calculator>

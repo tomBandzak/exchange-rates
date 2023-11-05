@@ -4,10 +4,12 @@ import { Col, HeadCol, Row, Table } from '../styled';
 import flags from '../assets/flags';
 
 type Props = {
+  exchangedCurrency?: string;
   rates: CurrencyRow[];
+  setExchangedCurrency: (currency: string) => void;
 }
 
-export const CurrenciesTable = ({ rates }: Props) => <Table>
+export const CurrenciesTable = ({ exchangedCurrency, rates, setExchangedCurrency }: Props) => <Table>
   <thead>
     <tr>
       <HeadCol />
@@ -19,6 +21,9 @@ export const CurrenciesTable = ({ rates }: Props) => <Table>
     </tr>
   </thead>
   <tbody>
-  {rates.map(rate => <Row key={rate.currencyCode}><Col><img alt={'flag'} height={35} src={flags[rate.currencyCode]}/></Col>{Object.values(rate).map((col, j) => <Col key={`col-${j}`}>{col}</Col>)}</Row>)}
+  {rates.map(rate => <Row key={rate.currencyCode} selected={exchangedCurrency === rate.currencyCode} onClick={() => setExchangedCurrency(rate.currencyCode)}>
+    <Col><img alt={'flag'} height={35} src={flags[rate.currencyCode]}/></Col>
+    {Object.values(rate).map((col, j) => <Col key={`col-${j}`}>{col}</Col>)}
+  </Row>)}
   </tbody>
 </Table>

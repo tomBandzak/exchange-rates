@@ -4,6 +4,7 @@ import BRL from './BRL.png';
 import CAD from './CAD.png';
 import CHF from './CHF.png';
 import CNY from './CNY.png';
+import CZK from './CZK.png';
 import DKK from './DKK.png';
 import EUR from './EUR.png';
 import GBP from './GBP.png';
@@ -37,6 +38,7 @@ const flags: {[key: string]: any} = {
   CAD,
   CHF,
   CNY,
+  CZK,
   DKK,
   EUR,
   GBP,

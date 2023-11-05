@@ -1,18 +1,20 @@
-import { Calculator} from './CalculatorLine';
-import { Dropdown, Input } from './Form';
+import { Calculator, Flag } from './CalculatorLine';
+import { Input, SelectOption } from './Form';
 import { XLargeHeading } from './Headings';
-import { Page } from './Page';
+import { Box, Page } from './Page';
 import { Col, HeadCol, Row, Table } from './Table';
 import { theme } from './theme';
 
 export {
+  Box,
   Calculator,
   Col,
-  Dropdown,
+  Flag,
   HeadCol,
   Input,
   Page,
   Row,
+  SelectOption,
   Table,
   theme,
   XLargeHeading
