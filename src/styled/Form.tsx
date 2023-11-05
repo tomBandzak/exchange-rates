@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { theme } from './theme';
+import { InputHTMLAttributes } from "react";
 
-export const Input = styled.input<{ isError?: boolean }>`
+interface StyledInputProps extends InputHTMLAttributes<HTMLInputElement>{
+  isError?: boolean;
+};
+const ErrorInput = ({ isError, ...remaining }: StyledInputProps) => <input {...remaining} />;
+export const Input = styled(ErrorInput)`
   padding: ${theme.spacing.a} ${theme.spacing.b};
   margin: 0 ${theme.spacing.d};
   border: ${props => props.isError ? '2px' : '1px' } solid ${props => props.isError ? theme.colors.line.error : theme.colors.line.normal};
