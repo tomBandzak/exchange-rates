@@ -21,6 +21,9 @@ export const Input = styled.input<{ isError?: boolean }>`
   &:last-child {
     margin-right: ${theme.spacing.b};
   }
+  @media (max-width: 840px) {
+    margin-left: 0;
+  }  
 `;
 
 export const SelectOption = styled.span`
