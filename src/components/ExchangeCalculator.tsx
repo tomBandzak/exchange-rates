@@ -12,18 +12,7 @@ type Props = {
 }
 
 export const ExchangeCalculator = ({ currencies, exchangedCurrency, setExchangedCurrency }: Props) => {
-  let inputValidation: NodeJS.Timeout | undefined = undefined;
-  // not sure if decimal is accepted as input for calculation - going with string
-  const [inputIsError, setInputIsError] = useState<boolean>(false);
-  const [exchangedAmount, setExchangedAmount] = useState<string | undefined>(undefined);
-
-  const validateInput = (num: string) => {
-    setExchangedAmount(num)
-    const parsedNumber = num === '' ? 0 : parseFloat(num);
-
-    clearTimeout(inputValidation);
-    inputValidation = setTimeout(() => setInputIsError(isNaN(parsedNumber)), 500);
-  }
+  const [exchangedAmount, setExchangedAmount] = useState<number | undefined>(undefined);
 
   const options = currencies.map(currency => ({
     value: currency.currencyCode,
@@ -38,10 +27,9 @@ export const ExchangeCalculator = ({ currencies, exchangedCurrency, setExchanged
   return <Calculator>
     <Flag alt={'flag'} height={35} src={flags.CZK}/> CZK
     <Input
-      type={'text'}
+      type={'number'}
       value={exchangedAmount}
-      onChange={e => validateInput(e.target.value)}
-      isError={inputIsError}
+      onChange={e => setExchangedAmount(Number.parseFloat(e.target.value))}
       placeholder={'0'}
     /> <Arrow />
     <Select
@@ -55,7 +43,7 @@ export const ExchangeCalculator = ({ currencies, exchangedCurrency, setExchanged
       }}/>
     <Input
       type={'text'}
-      value={formatNumber(calculateAmountInCurrency(parseFloat(exchangedAmount || '') || 0, currencies.find(currency => currency.currencyCode === exchangedCurrency) || currencies[0]) || 0)}
+      value={formatNumber(calculateAmountInCurrency(exchangedAmount || 0, currencies.find(currency => currency.currencyCode === exchangedCurrency) || currencies[0]) || 0)}
       readOnly={true}
     />
   </Calculator>

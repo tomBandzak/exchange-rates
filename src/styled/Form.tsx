@@ -14,6 +14,12 @@ export const Input = styled(ErrorInput)`
   font-size: ${theme.typography.medium.normal.fontSize};
   font-weight: ${theme.typography.medium.normal.fontWeight};
   line-height: ${theme.typography.medium.normal.lineHeight};
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  -moz-appearance: textfield;
   &:focus {
     outline: 2px solid ${props => props.isError ? theme.colors.line.error : theme.colors.line.focus} !important;
     border-color: ${props => props.isError ? theme.colors.line.error : theme.colors.line.focus}
