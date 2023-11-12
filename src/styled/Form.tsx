@@ -15,7 +15,8 @@ export const Input = styled(ErrorInput)`
   font-weight: ${theme.typography.medium.normal.fontWeight};
   line-height: ${theme.typography.medium.normal.lineHeight};
   &:focus {
-    border: 2px solid ${props => props.isError ? theme.colors.line.error : theme.colors.line.focus} !important;    
+    outline: 2px solid ${props => props.isError ? theme.colors.line.error : theme.colors.line.focus} !important;
+    border-color: ${props => props.isError ? theme.colors.line.error : theme.colors.line.focus}
   }
   &:focus-visible {
     outline: unset;
