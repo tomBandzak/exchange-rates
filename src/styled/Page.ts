@@ -1,14 +1,13 @@
 import styled from 'styled-components';
-import { theme } from './theme';
 
 export const Page = styled.div`
-  padding-left: ${theme.spacing.d};
-  padding-bottom: ${theme.spacing.d};
+  padding-left: ${props => props.theme.spacing.d};
+  padding-bottom: ${props => props.theme.spacing.d};
 `;
 
 export const Box = styled.div`
   border-radius: 10px;
-  background-color: ${theme.colors.background.main};
+  background-color: ${props => props.theme.colors.background.main};
   width: fit-content;
-  padding: ${theme.spacing.b} 0;
+  padding: ${props => props.theme.spacing.b} 0;
 `;

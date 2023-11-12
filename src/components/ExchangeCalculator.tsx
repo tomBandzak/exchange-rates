@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { CurrencyRow } from '../functions/parseCurrencyRow';
-import {Arrow, Calculator, Flag, Input, SelectOption, theme} from '../styled';
+import { Arrow, Calculator, Flag, Input, SelectOption, theme } from '../styled';
 import { calculateAmountInCurrency, formatNumber } from '../functions';
 import flags from '../assets/flags';
 

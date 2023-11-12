@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { theme } from './theme';
 
 export const Calculator = styled.div`
-  margin-left: ${theme.spacing.b};
-  margin-top: ${theme.spacing.b};
-  margin-bottom: ${theme.spacing.d};
+  margin-left: ${props => props.theme.spacing.b};
+  margin-top: ${props => props.theme.spacing.b};
+  margin-bottom: ${props => props.theme.spacing.d};
   display: flex;
   justify-content: left;
   align-items: center;
@@ -15,12 +14,12 @@ export const Calculator = styled.div`
 `;
 
 export const Flag = styled.img`
-  margin-right: 5px;
+  margin-right: ${props => props.theme.spacing.a};
 `;
 
 export const Arrow = styled.span`
   &::before {
     content: '→';
   }
-  margin-right: ${theme.spacing.d};
+  margin-right: ${props => props.theme.spacing.d};
 `;

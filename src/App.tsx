@@ -3,8 +3,9 @@ import './App.css';
 import { CurrenciesTable, ExchangeCalculator } from './components';
 import { getExchangeRates } from './request/ratesRequest';
 import { QueryClient, useQuery } from '@tanstack/react-query';
-import { Box, Description, Page, XLargeHeading } from './styled';
+import {Box, Description, Page, theme, XLargeHeading} from './styled';
 import { pictures } from './assets/images';
+import {ThemeProvider} from "styled-components";
 
 function App() {
   const [exchangedCurrency, setExchangedCurrency] = useState<string | undefined>(undefined);
@@ -20,6 +21,7 @@ function App() {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <Page>
       <div>
         <XLargeHeading>Czech crowns conversion calculator</XLargeHeading>
@@ -38,6 +40,7 @@ function App() {
           </>}
       </div>
     </Page>
+    </ThemeProvider>
   );
 }
 
