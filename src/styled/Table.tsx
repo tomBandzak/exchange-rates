@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 import { theme } from './theme';
+import {InputHTMLAttributes} from "react";
+
+interface StyledInputProps extends InputHTMLAttributes<HTMLTableHeaderCellElement>{
+  minWidth?: string;
+};
 
 export const Table = styled.table`
   background-color: ${theme.colors.background.main};
@@ -8,10 +13,11 @@ export const Table = styled.table`
   width: 100%;
 `;
 
-export const HeadCol = styled.th<{ width?: string, minwidth?: string }>`
+const StyledHeaderCell = ({ minWidth, ...remaining }: StyledInputProps) => <th {...remaining} />;
+export const HeadCol = styled(StyledHeaderCell)`
   padding: ${theme.spacing.a} ${theme.spacing.b};
   width: ${props => props.width || 'fit-content'};
-  min-width: ${props => props.minwidth || 'unset'};
+  min-width: ${props => props.minWidth || 'unset'};
   border-top: 1px solid ${theme.colors.line.normal};
   border-bottom: 1px solid ${theme.colors.line.normal};
   color: ${theme.colors.font.main};
