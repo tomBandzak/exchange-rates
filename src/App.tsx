@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import { CurrenciesTable, ExchangeCalculator } from './components';
-import { ratesFixture } from './fixtures/ratesFixture';
 import { CurrencyRow, parseCurrencyRow } from './functions/parseCurrencyRow';
 import { getExchangeRates } from './request/ratesRequest';
 import { QueryClient, useQuery } from '@tanstack/react-query';
@@ -17,12 +16,6 @@ function App() {
   const { data, isLoading, error } = useQuery({ queryKey: ['exchangeRates'], queryFn: getExchangeRates }, queryClient);
 
   useEffect(() => {
-    /* leaving here for dev / test purposes */
-    // const rates = ratesFixture.split('\n').slice(2).map(row => parseCurrencyRow(row));
-    // setDateString(ratesFixture.split('\n')[0].split('#')[0]);
-    // setCurrencyList(rates);
-    // setExchangedCurrency(rates[0].currencyCode)
-    /* ---------------------------------------- */
     if (!isLoading && !error && data) {
       const rates = data.split('\n').slice(2).filter(Boolean).map(row => parseCurrencyRow(row));
       setDateString(data.split('\n')[0].split('#')[0]);
