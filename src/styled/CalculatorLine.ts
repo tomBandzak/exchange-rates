@@ -7,10 +7,15 @@ export const Calculator = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
-  @media (max-width: 840px) {
+  @media (max-width: 700px) {
     flex-direction: column;
     align-items: baseline;
   }
+`;
+
+export const CzechCrownsDiv = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 export const Flag = styled.img`

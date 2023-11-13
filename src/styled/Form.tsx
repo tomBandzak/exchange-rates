@@ -32,7 +32,7 @@ export const Input = styled(ErrorInput)`
   &:last-child {
     margin-right: ${props => props.theme.spacing.b};
   }
-  @media (max-width: 840px) {
+  @media (max-width: 700px) {
     margin-left: 0;
   }  
 `;

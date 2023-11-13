@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
 import { CurrencyRow } from '../functions/parseCurrencyRow';
-import { Arrow, Calculator, Flag, Input, SelectOption, theme } from '../styled';
+import { Arrow, Calculator, CzechCrownsDiv, Flag, Input, SelectOption, theme } from '../styled';
 import { calculateAmountInCurrency, formatNumber } from '../functions';
 import flags from '../assets/flags';
 
@@ -25,7 +25,9 @@ export const ExchangeCalculator = ({ currencies, exchangedCurrency, setExchanged
   } : undefined;
 
   return <Calculator>
-    <Flag alt={'flag'} height={35} src={flags.CZK}/> CZK
+    <CzechCrownsDiv>
+      <Flag alt={'flag'} height={35} src={flags.CZK}/> CZK
+    </CzechCrownsDiv>
     <Input
       type={'number'}
       value={exchangedAmount}

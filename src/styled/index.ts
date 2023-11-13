@@ -1,4 +1,4 @@
-import { Arrow, Calculator, Flag } from './CalculatorLine';
+import { Arrow, Calculator, CzechCrownsDiv, Flag } from './CalculatorLine';
 import { Input, SelectOption } from './Form';
 import { Description, XLargeHeading } from './Headings';
 import { Box, Page } from './Page';
@@ -10,6 +10,7 @@ export {
   Box,
   Calculator,
   Col,
+  CzechCrownsDiv,
   Description,
   Flag,
   HeadCol,
